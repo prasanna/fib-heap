@@ -1,14 +1,17 @@
-# Commands
-RM=\rm
-CC=g++
-MKDIR=\mkdir
-
-# Program files
+# Program specific variables
 OUTPUT_DIR=out
 SRC_DIR=src
 PROGRAM=${OUTPUT_DIR}/fib_heap
-SRCS=${SRC_DIR}/fib_heap.cpp
-OBJS=$(addprefix ${OUTPUT_DIR}/,$(notdir $(SRCS:.cpp=.o)))
+SRC_FILES=fib_heap.cpp
+
+# Commands
+RM=\rm
+CXX=g++
+MKDIR=\mkdir
+
+# Generic variables
+SRCS=$(addprefix ${SRC_DIR}/,${SRC_FILES})
+OBJS=$(addprefix ${OUTPUT_DIR}/,$(SRC_FILES:.cpp=.o))
 
 
 all: ${OUTPUT_DIR} ${PROGRAM} functional-test
@@ -26,8 +29,9 @@ functional-test:
 	test/functional/run.sh
 
 $(OBJS): $(SRCS)
-	${CC} -Wall -c $< -o $@
+	echo $^
+	${CXX} -Wall -c $< -o $@
 
 ${PROGRAM}: $(OBJS)
 	echo $^
-	${CC} -Wall $^ -o $@
+	${CXX} -Wall $^ -o $@
