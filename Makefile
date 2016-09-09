@@ -1,25 +1,34 @@
+# Commands
 RM=\rm
 CC=g++
 MKDIR=\mkdir
 
-all: clean compile unit-test link functional-test
+# Program files
+OUTPUT_DIR=out
+SRC_DIR=src
+PROGRAM=${OUTPUT_DIR}/fib_heap
+SRCS=${SRC_DIR}/fib_heap.cpp
+OBJS_TMP=$(notdir $(SRCS:.cpp=.o))
+OBJS=$(addprefix ${OUTPUT_DIR}/,$(OBJS_TMP))
 
-clean: .clean-out-dir
 
-.clean-out-dir:
-	if [ -d out ]; then ${RM} -rf out; fi
+all: ${OUTPUT_DIR} ${PROGRAM} functional-test
 
-compile: .make-out-dir
-	${CC} -c -o out/fib_heap.o src/fib_heap.cpp
+clean:
+	if [ -d out ]; then ${RM} -rf ${OUTPUT_DIR}; fi
 
-.make-out-dir:
+${OUTPUT_DIR}:
 	${MKDIR} -p out
 
 unit-test:
 	echo "Haven't decided how to unit test, yet!"
 
-link:
-	${CC} -o out/fib_heap out/fib_heap.o
-
 functional-test:
 	test/functional/run.sh
+
+$(OBJS): $(SRCS)
+	${CC} -Wall -c $< -o $@
+
+${PROGRAM}: $(OBJS)
+	echo $^
+	${CC} -Wall $^ -o $@
