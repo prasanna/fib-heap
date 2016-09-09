@@ -10,7 +10,7 @@ clean: .clean-out-dir
 	if [ -d out ]; then ${RM} -rf out; fi
 
 compile: .make-out-dir
-	${CC} -c -o out/fib_heap.o fib_heap.cpp
+	${CC} -c -o out/fib_heap.o src/fib_heap.cpp
 
 .make-out-dir:
 	${MKDIR} -p out
