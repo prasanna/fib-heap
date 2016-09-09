@@ -1,8 +1,6 @@
-#include<iostream>
+#include "fib_heap.h"
 
-using namespace std;
-
-int main()
-{
-  cout << "Hello, world!" << endl;
+int FibonacciHeap::X() {
+  return x;
 }
+
