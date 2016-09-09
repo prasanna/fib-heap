@@ -8,8 +8,7 @@ OUTPUT_DIR=out
 SRC_DIR=src
 PROGRAM=${OUTPUT_DIR}/fib_heap
 SRCS=${SRC_DIR}/fib_heap.cpp
-OBJS_TMP=$(notdir $(SRCS:.cpp=.o))
-OBJS=$(addprefix ${OUTPUT_DIR}/,$(OBJS_TMP))
+OBJS=$(addprefix ${OUTPUT_DIR}/,$(notdir $(SRCS:.cpp=.o)))
 
 
 all: ${OUTPUT_DIR} ${PROGRAM} functional-test
