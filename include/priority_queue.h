@@ -6,7 +6,7 @@ class PriorityQueue {
   virtual void insert(int) = 0;
   virtual int find_min() = 0;
   virtual void delete_min() = 0;
-  virtual void delete_node(int) = 0;
+  virtual void delete_element(int) = 0;
 };
 
 

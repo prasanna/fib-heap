@@ -22,9 +22,20 @@ int BasicPriorityQueue::find_min() {
 }
 
 void BasicPriorityQueue::delete_min() {
+  delete_element(find_min());
 }
 
-void BasicPriorityQueue::delete_node(int element) {
+void BasicPriorityQueue::delete_element(int element) {
+  bool element_found = false;
+  for(int i = 0; i < size; i++) {
+    if(elements[i] == element) {
+      element_found = true;
+      size -= 1;
+    }
+    if(element_found && i < size) {
+      elements[i] = elements[i+1];
+    }
+  }
 }
 
 void BasicPriorityQueue::double_size_of_elements() {
