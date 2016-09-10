@@ -54,3 +54,6 @@ BasicPriorityQueue::BasicPriorityQueue(int initial_max_size) {
   elements = new int[max_size];
 }
 
+BasicPriorityQueue::~BasicPriorityQueue() {
+  delete elements;
+}
