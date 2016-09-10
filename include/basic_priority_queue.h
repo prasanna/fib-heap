@@ -14,7 +14,7 @@ class BasicPriorityQueue : public PriorityQueue {
   BasicPriorityQueue(int);
   ~BasicPriorityQueue();
   virtual void insert(int);
-  virtual int find_min();
+  virtual int  find_min();
   virtual void delete_min();
   virtual void delete_element(int);
 };
