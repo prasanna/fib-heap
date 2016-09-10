@@ -5,13 +5,14 @@ INCLUDE_DIR=include
 UNITTEST_SRC_DIR=test/unit
 UNITTEST_OBJ_DIR=${OUTPUT_DIR}/unittests
 PROGRAM=${OUTPUT_DIR}/fib_heap
-SRC_FILES=main.cpp fib_heap.cpp
+SRC_FILES=main.cpp fib_heap.cpp basic_priority_queue.cpp
 
 # Google Test location
 GTEST_DIR=../googletest/googletest
 
 # Commands
 RM=\rm
+CC=gcc
 CXX=g++
 MKDIR=\mkdir
 AR=\ar
@@ -19,6 +20,7 @@ AR=\ar
 # Generic variables
 SRCS=$(addprefix ${SRC_DIR}/,${SRC_FILES})
 OBJS=$(addprefix ${OUTPUT_DIR}/,$(SRC_FILES:.cpp=.o))
+HEADERS=$(wildcard ${INCLUDE_DIR}/*.h)
 SRC_FILES_WITHOUT_MAIN=$(subst main.cpp,,${SRC_FILES})
 OBJS_WITHOUT_MAIN=$(addprefix ${OUTPUT_DIR}/,$(SRC_FILES_WITHOUT_MAIN:.cpp=.o))
 UNITTEST_SRCS=$(addprefix ${UNITTEST_SRC_DIR}/,$(SRC_FILES_WITHOUT_MAIN:.cpp=_unittest.cpp))
@@ -44,7 +46,7 @@ ${OUTPUT_DIR}:
 ${OUTPUT_DIR}/main.o: ${SRC_DIR}/main.cpp
 	${CXX} -I${INCLUDE_DIR} -Wall -c $< -o $@
 
-${OUTPUT_DIR}/%.o : ${SRC_DIR}/%.cpp
+${OUTPUT_DIR}/%.o : ${SRC_DIR}/%.cpp ${HEADERS}
 	${CXX} -I${INCLUDE_DIR} -Wall -c $< -o $@
 
 ${PROGRAM}: $(OBJS)
@@ -64,15 +66,15 @@ ${UNITTEST_OBJ_DIR}:
 
 
 ${UNITTEST_OBJ_DIR}/fib_heap_unittest.o: ${UNITTEST_SRC_DIR}/fib_heap_unittest.cpp
-	${CXX} ${GTEST_CPPFLAGS} ${GTEST_CXXFLAGS} -c $^ -o $@
+	${CXX} ${GTEST_CPPFLAGS} -I${INCLUDE_DIR} ${GTEST_CXXFLAGS} -c $^ -o $@
 
 ${UNITTEST_OBJ_DIR}/%_unittest.o: ${UNITTEST_SRC_DIR}/%_unittest.cpp
-	${CXX} ${GTEST_CPPFLAGS} ${GTEST_CXXFLAGS} -c $^ -o $@
+	${CXX} ${GTEST_CPPFLAGS} -I${INCLUDE_DIR} ${GTEST_CXXFLAGS} -c $^ -o $@
 
-${OUTPUT_DIR}/run_unittests: $(OBJS_WITHOUT_MAIN) $(UNITTEST_OBJS) ${UNITTEST_OBJ_DIR}/gtest_main.a
+${OUTPUT_DIR}/run_unittests: ${OBJS_WITHOUT_MAIN} ${UNITTEST_OBJS} ${UNITTEST_OBJ_DIR}/gtest_main.a
 	${CXX} ${GTEST_CPPFLAGS} ${GTEST_CXXFLAGS} -lpthread $^ -o $@
 
-unit-test: ${UNITTEST_OBJ_DIR} ${GTEST_HEADERS} ${OUTPUT_DIR}/run_unittests
+unit-test: ${UNITTEST_OBJ_DIR} ${GTEST_HEADERS} ${INCLUDE_DIR}/*.h ${OUTPUT_DIR}/run_unittests
 	out/run_unittests
 
 functional-test:

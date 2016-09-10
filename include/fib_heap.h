@@ -1,7 +1,9 @@
 #ifndef FIBONACCI_HEAP
 #define FIBONACCI_HEAP
 
-class FibonacciHeap {
+#include "priority_queue.h"
+
+class FibonacciHeap : public PriorityQueue {
  private:
   int x;
 
