@@ -10,5 +10,4 @@ class PriorityQueue {
   virtual void delete_element(int) = 0;
 };
 
-
 #endif // PRIORITY_QUEUE

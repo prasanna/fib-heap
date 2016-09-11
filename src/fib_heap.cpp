@@ -1,7 +1,7 @@
 #include "fib_heap.h"
 
 void FibonacciHeap::insert(int element) {
-  tree_factory->create();
+  root_list->push_back(tree_factory->create());
 }
 
 int FibonacciHeap::find_min() {
@@ -15,7 +15,8 @@ void FibonacciHeap::delete_element(int element) {
 
 }
 
-FibonacciHeap::FibonacciHeap(TreeFactory * tree_factory) {
+FibonacciHeap::FibonacciHeap(list<Tree *> * root_list, TreeFactory * tree_factory) {
+  this->root_list = root_list;
   this->tree_factory = tree_factory;
 }
 
