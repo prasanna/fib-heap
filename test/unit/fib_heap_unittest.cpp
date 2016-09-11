@@ -8,16 +8,15 @@ using ::testing::Return;
 
 template <>
 PriorityQueue* CreatePriorityQueue<FibonacciHeap>() {
-return new FibonacciHeap(new list<Tree *>(), new MockTreeFactory());
+return new FibonacciHeap(new list<Tree *>(), new TreeFactory());
 }
 
 typedef Types<FibonacciHeap> PriorityQueueImplementations;
 
-/*
 INSTANTIATE_TYPED_TEST_CASE_P(FibonacciHeapPriorityQueueTests,
 			      PriorityQueueTest,
 			      PriorityQueueImplementations);
-*/
+
 
 TEST(FibonacciHeapTest, CreatesNewTreeWhenInserting) {
   MockTreeFactory mock_tree_factory;

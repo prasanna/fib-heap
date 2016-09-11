@@ -9,6 +9,7 @@ using namespace std;
 
 class FibonacciHeap : public PriorityQueue {
  private:
+  Tree * min;
   list<Tree *> * root_list;
   TreeFactory * tree_factory;
  public:
