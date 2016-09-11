@@ -1,11 +1,11 @@
 #include "fib_heap.h"
 
 void FibonacciHeap::insert(int element) {
-  Tree * tree = tree_factory->create();
-  tree->add(element);
-  root_list->push_back(tree);
-  if(min == NULL || tree->get() < min->get()) {
-    min = tree;
+  HeapNode * heap_node = heap_node_factory->create();
+  heap_node->add(element);
+  root_list->push_back(heap_node);
+  if(min == NULL || heap_node->get() < min->get()) {
+    min = heap_node;
   }
 }
 
@@ -20,12 +20,12 @@ void FibonacciHeap::delete_element(int element) {
 
 }
 
-FibonacciHeap::FibonacciHeap(list<Tree *> * root_list, TreeFactory * tree_factory) {
+FibonacciHeap::FibonacciHeap(list<HeapNode *> * root_list, HeapNodeFactory * heap_node_factory) {
   this->min = NULL;
   this->root_list = root_list;
-  this->tree_factory = tree_factory;
+  this->heap_node_factory = heap_node_factory;
 }
 
 FibonacciHeap::~FibonacciHeap() {
-  delete tree_factory;
+  delete heap_node_factory;
 }
