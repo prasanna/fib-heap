@@ -22,8 +22,9 @@ INSTANTIATE_TYPED_TEST_CASE_P(FibonacciHeapPriorityQueueTests,
 TEST(FibonacciHeapTest, CreatesNewTreeWhenInserting) {
   MockTreeFactory mock_tree_factory;
   list<Tree *> * root_list = new list<Tree *>();
+  Tree * tree = new Tree();
 
-  EXPECT_CALL(mock_tree_factory, create()).Times(1);
+  EXPECT_CALL(mock_tree_factory, create()).WillOnce(Return(tree));
 
   FibonacciHeap * fib_heap = new FibonacciHeap(root_list, &mock_tree_factory);
   fib_heap->insert(1);
@@ -42,3 +43,15 @@ TEST(FibonacciHeapTest, AddsNewlyCreatedTreeToRootList) {
   EXPECT_EQ(tree, root_list->front());
 }
 
+TEST(FibonacciHeapTest, ElementIsAddedToNewlyCreatedTree) {
+  MockTreeFactory mock_tree_factory;
+  list<Tree *> * root_list = new list<Tree *>();
+  Tree * tree = new Tree();
+
+  EXPECT_CALL(mock_tree_factory, create()).WillOnce(Return(tree));
+
+  FibonacciHeap * fib_heap = new FibonacciHeap(root_list, &mock_tree_factory);
+  fib_heap->insert(1);
+
+  EXPECT_EQ(1, tree->get());
+}

@@ -5,7 +5,7 @@ INCLUDE_DIR=include
 UNITTEST_SRC_DIR=test/unit
 UNITTEST_OBJ_DIR=${OUTPUT_DIR}/unittests
 PROGRAM=${OUTPUT_DIR}/fib_heap
-SRC_FILES=main.cpp fib_heap.cpp basic_priority_queue.cpp tree_factory.cpp
+SRC_FILES=main.cpp fib_heap.cpp basic_priority_queue.cpp tree_factory.cpp tree.cpp
 
 # Google Test & Google Mock location
 GTEST_DIR=../googletest/googletest
