@@ -1,14 +1,17 @@
+#include "priority_queue.h"
+#include "tree_factory.h"
+
 #ifndef FIBONACCI_HEAP
 #define FIBONACCI_HEAP
 
-#include "priority_queue.h"
-
 class FibonacciHeap : public PriorityQueue {
+ private:
+  TreeFactory * tree_factory;
  public:
-  FibonacciHeap();
-  ~FibonacciHeap();
+  FibonacciHeap(TreeFactory *);
+  virtual ~FibonacciHeap();
   virtual void insert(int);
-  virtual int find_min();
+  virtual int  find_min();
   virtual void delete_min();
   virtual void delete_element(int);
 };

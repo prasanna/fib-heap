@@ -12,7 +12,7 @@ class BasicPriorityQueue : public PriorityQueue {
   
  public:
   BasicPriorityQueue(int);
-  ~BasicPriorityQueue();
+  virtual ~BasicPriorityQueue();
   virtual void insert(int);
   virtual int  find_min();
   virtual void delete_min();

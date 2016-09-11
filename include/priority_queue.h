@@ -3,6 +3,7 @@
 
 class PriorityQueue {
  public:
+  virtual ~PriorityQueue() {};
   virtual void insert(int) = 0;
   virtual int find_min() = 0;
   virtual void delete_min() = 0;
