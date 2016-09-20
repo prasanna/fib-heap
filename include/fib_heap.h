@@ -1,5 +1,5 @@
 #include "priority_queue.h"
-#include "heap_node_factory.h"
+#include "heap_factory.h"
 #include <list>
 
 #ifndef FIBONACCI_HEAP
@@ -9,12 +9,12 @@ using namespace std;
 
 class FibonacciHeap : public PriorityQueue {
  private:
-  HeapNode * min;
+  Heap * min;
   int size;
-  list<HeapNode *> * root_list;
-  HeapNodeFactory * heap_node_factory;
+  list<Heap *> * root_list;
+  HeapFactory * heap_factory;
  public:
-  FibonacciHeap(list<HeapNode *> *, HeapNodeFactory *);
+  FibonacciHeap(list<Heap *> *, HeapFactory *);
   virtual ~FibonacciHeap();
   virtual void insert(int);
   virtual int  find_min();
