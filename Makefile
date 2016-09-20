@@ -73,10 +73,10 @@ ${UNITTEST_OBJ_DIR}/gtest_main.a: ${UNITTEST_OBJ_DIR}/gtest-all.o ${UNITTEST_OBJ
 ${UNITTEST_OBJ_DIR}:
 	mkdir -p ${UNITTEST_OBJ_DIR}
 
-${UNITTEST_OBJ_DIR}/fib_heap_unittest.o: ${UNITTEST_SRC_DIR}/fib_heap_unittest.cpp ${UNITTEST_HEADERS}
+${UNITTEST_OBJ_DIR}/fib_heap_unittest.o: ${UNITTEST_SRC_DIR}/fib_heap_unittest.cpp  ${OUTPUT_DIR}/fib_heap.o ${UNITTEST_HEADERS}
 	${CXX} ${GTEST_CPPFLAGS} -I${INCLUDE_DIR} ${GTEST_CXXFLAGS} -c $< -o $@
 
-${UNITTEST_OBJ_DIR}/%_unittest.o: ${UNITTEST_SRC_DIR}/%_unittest.cpp ${UNITTEST_HEADERS}
+${UNITTEST_OBJ_DIR}/%_unittest.o: ${UNITTEST_SRC_DIR}/%_unittest.cpp ${OUTPUT_DIR}/%.o ${UNITTEST_HEADERS}
 	${CXX} ${GTEST_CPPFLAGS} -I${INCLUDE_DIR} ${GTEST_CXXFLAGS} -c $< -o $@
 
 ${OUTPUT_DIR}/run_unittests: ${OBJS_WITHOUT_MAIN} ${UNITTEST_OBJS} ${UNITTEST_OBJ_DIR}/gtest_main.a

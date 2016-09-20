@@ -10,6 +10,7 @@ using namespace std;
 class FibonacciHeap : public PriorityQueue {
  private:
   HeapNode * min;
+  int size;
   list<HeapNode *> * root_list;
   HeapNodeFactory * heap_node_factory;
  public:
